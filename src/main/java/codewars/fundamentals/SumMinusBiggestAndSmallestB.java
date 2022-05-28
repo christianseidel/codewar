@@ -1,6 +1,6 @@
 package codewars.fundamentals;
 
-public class Kata01B {
+public class SumMinusBiggestAndSmallestB {
 
     public static int sum(int[] numbers) {
         if (numbers == null || numbers.length < 2) {

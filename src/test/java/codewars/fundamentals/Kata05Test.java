@@ -11,12 +11,12 @@ class Kata05Test {
     @Test
     public void testBasics()
     {
-        assertThat(Kata05.basicMath("+", 4, 7), is(11));
-        assertThat(Kata05.basicMath("-", 15, 18), is(-3));
-        assertThat(Kata05.basicMath("*", 5, 5), is(25));
-        assertThat(Kata05.basicMath("/", 49, 7), is(7));
+        assertThat(BasicMath.basicMath("+", 4, 7), is(11));
+        assertThat(BasicMath.basicMath("-", 15, 18), is(-3));
+        assertThat(BasicMath.basicMath("*", 5, 5), is(25));
+        assertThat(BasicMath.basicMath("/", 49, 7), is(7));
         assertThatIllegalArgumentException()
-                .isThrownBy(()-> Kata05.basicMath("l", 6, 7))
+                .isThrownBy(()-> BasicMath.basicMath("l", 6, 7))
                 .withMessage("Unknown operation: l");
     }
 }

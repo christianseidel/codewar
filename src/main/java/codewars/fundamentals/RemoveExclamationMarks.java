@@ -1,6 +1,6 @@
 package codewars.fundamentals;
 
-public class Kata02 {
+public class RemoveExclamationMarks {
 
     /*  Write function RemoveExclamationMarks which removes
         all exclamation marks from a given string.  */
