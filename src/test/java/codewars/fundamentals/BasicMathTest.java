@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class Kata05Test {
+class BasicMathTest {
 
     @Test
     public void testBasics()
