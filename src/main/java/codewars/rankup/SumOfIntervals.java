@@ -28,11 +28,11 @@ public class SumOfIntervals {
     // empty intervals
             Interval.sumIntervals(new int[][]{});  // => 0
             Interval.sumIntervals(new int[][]{2,2}, {5,5});  // => 0
-// disjoint intervals
+    // disjoint intervals
             Interval.sumIntervals(new int[][]{
                 {1,2},{3,5}
                 });  // => (2-1) + (5-3) = 3
-// overlapping intervals
+    // overlapping intervals
              Interval.sumIntervals(new int[][]{
                 {1,4},{3,6},{2,8}
                 });  // [1,8] => 7
@@ -40,7 +40,11 @@ public class SumOfIntervals {
 
     public static int sumIntervals(int[][] intervals) {
 
-        // Intervalls will first be sorted depending on their first value.
+        if ((intervals == null) || (intervals.length == 0)) {
+            return 0;
+        }
+
+        // Intervalls will first be sorted according to their first value.
         for (int i = 0; i < intervals.length; i++) {
             int j = i;
             while (((j + 1) < intervals.length) && (intervals[j][0] > intervals[j+1][0])) {
@@ -60,40 +64,18 @@ public class SumOfIntervals {
 
         // Single intervalls will then be calculated and retained.
         //// int[][] ledger = new int[intervals.length][3];
-        int[] lengths = new int[intervals.length];
+        int lengths = 0;
         for (int k = 0; k < intervals.length; k++) {
-            lengths[k] = intervals[k][1] - intervals[k][0];
-            if (intervals[k][1] > intervals[k+1][0]) {
-                intervals[k+1][0] = intervals[k][1];
-            }
-        }
-
-        return Arrays.stream(lengths).sum();
-
-
-        /*
-        boolean start = false;
-        answer
-        int i = 0;
-        while (start == false) {
-            for (int j = i; i < intervals.length; i++ ) {
-                if ((intervals == null) || (intervals[i][1] == 0)) {
-                    i++;
+            lengths = lengths + (intervals[k][1] - intervals[k][0]);
+            if (k == intervals.length - 1) {
+                break;
+            } else {
+                if (intervals[k][1] > intervals[k+1][0]) {
+                    intervals[k+1][0] = intervals[k][1];
                 }
             }
         }
-
-
-        try {
-
-
-        } catch (NullPointerException e) {
-
-        }
-
-*/
-
-
+        return lengths;
     }
 
 }

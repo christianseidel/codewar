@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SumOfIntervalsTest {
 
     @Test
-    public void testThreeDisjointIntervallsInIncreasingOrder() {
+    public void shouldHandleThreeDisjointIntervallsInIncreasingOrder() {
 
         // given
         int [] a = {3, 5};
@@ -25,7 +25,7 @@ class SumOfIntervalsTest {
     }
 
     @Test
-    public void testThreeDisjointIntervallsInDecreasingOrder() {
+    public void shouldHandleDisjointIntervallsInDecreasingOrder() {
 
         // given
         int [] a = {50, 51};
@@ -37,14 +37,11 @@ class SumOfIntervalsTest {
         int actual = SumOfIntervals.sumIntervals(firstArray);
 
         //then
-        //assertEquals(8, actual);
-  //      System.out.println(actual[0][0] + ", " + actual[0][1]);
-  //      System.out.println(actual[1][0] + ", " + actual[1][1]);
-  //      System.out.println(actual[2][0] + ", " + actual[2][1]);
+        assertEquals(18, actual);
     }
 
     @Test
-    public void testFiveDisjointIntervallsInNoOrder() {
+    public void shouldHandleFiveDisjointIntervallsInNoOrder() {
 
         // given
         int [] a = {7, 9};
@@ -58,9 +55,9 @@ class SumOfIntervalsTest {
         int actual = SumOfIntervals.sumIntervals(firstArray);
 
         //then
-        assertEquals(8, actual);
+        assertEquals(33, actual);
     }
-/*
+
     @Test
     public void shouldHandleNullOrEmptyIntervals() {
         assertEquals(0, SumOfIntervals.sumIntervals(null));
@@ -69,7 +66,18 @@ class SumOfIntervalsTest {
     }
 
     @Test
-    public void shouldAddDisjoinedIntervals() {
+    public void shouldHandleEmptyIntervalsAfterFullIntervals() {
+        assertEquals(16, SumOfIntervals.sumIntervals(new int[][]{{4, 5}, {0, 0}, {18, 33}}));
+    }
+
+    @Test
+    public void shouldHandleInveralOverlappingOnBothSides() {
+        assertEquals(8, SumOfIntervals.sumIntervals(new int[][]{{4, 5}, {7, 11}, {5, 12}}));
+        assertEquals(8, SumOfIntervals.sumIntervals(new int[][]{{4, 5}, {5, 12}, {7, 11}}));
+    }
+
+    @Test
+    public void shouldAddDisjointIntervals() {
         assertEquals(9, SumOfIntervals.sumIntervals(new int[][]{{1, 2}, {6, 10}, {11, 15}}));
         assertEquals(11, SumOfIntervals.sumIntervals(new int[][]{{4, 8}, {9, 10}, {15, 21}}));
         assertEquals(7, SumOfIntervals.sumIntervals(new int[][]{{-1, 4}, {-5, -3}}));
@@ -95,5 +103,5 @@ class SumOfIntervalsTest {
         assertEquals(1234, SumOfIntervals.sumIntervals(new int[][]{{-7, 8}, {-2, 10}, {5, 15}, {2000, 3150}, {-5400, -5338}}));
         assertEquals(158, SumOfIntervals.sumIntervals(new int[][]{{-101, 24}, {-35, 27}, {27, 53}, {-105, 20}, {-36, 26},}));
     }
-*/
+
 }
