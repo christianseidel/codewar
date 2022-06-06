@@ -48,9 +48,9 @@ public class SumOfIntervals {
         int[][] ledger = establishLedger (sortedIntervals);
 
         while (countRemainingIntervals(ledger) > 0) {
-            System.out.println(Arrays.deepToString(ledger));
+            System.out.println(Arrays.deepToString(ledger));   // OUT
             ledger = eliminateOneLevelOfOverlap(ledger);
-            System.out.println(Arrays.deepToString(ledger));
+            System.out.println(Arrays.deepToString(ledger));   // OUT
             int numberOfRemaining = countRemainingIntervals(ledger);
             int[][] nextLedger = new int[numberOfRemaining][4];
             int indexNextLedger = 0;
@@ -109,7 +109,7 @@ public class SumOfIntervals {
     }
 
     private int[][] eliminateOneLevelOfOverlap(int[][] ledger) {
-        for (int m = 0; m < ledger.length; m++) {
+        for (int m = 0; (m + 1) < ledger.length; m++) {
             // difference between start of next and end of current interval
             int difference = ledger[m+1][0] - ledger [m][1];
             // check if there is overlap
@@ -118,6 +118,9 @@ public class SumOfIntervals {
                 ledger[m+1][2] = ledger[m+1][2] + difference;   // m+1 gets shortened
             } else {
                 ledger[m][3] = 0;                               // if not index 3 = 0 meaning 'false'
+                if (m + 2 == ledger.length) {
+                    ledger[m+1][3] = 0;
+                }
             }
         }
         return ledger;
