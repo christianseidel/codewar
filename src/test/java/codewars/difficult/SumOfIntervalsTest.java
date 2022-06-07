@@ -2,7 +2,7 @@ package codewars.difficult;
 
 import org.junit.jupiter.api.Test;
 
-import static codewars.difficult.SumOfIntervalsOld.sumIntervals;
+import static codewars.difficult.SumOfIntervals.sumIntervals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SumOfIntervalsTest {
@@ -141,15 +141,14 @@ class SumOfIntervalsTest {
 
     @Test
     public void shouldHandleIntervalsBelowZero() {
-//        assertEquals(500, sumIntervals(new int[][]{{-400, -300}, {-100, 200}, {500, 600}}));
         assertEquals(800, sumIntervals(new int[][]{{-400, -200}, {-300, 300}, {-500, 300}, {-50, 50}}));
 
     }
 
     @Test
     public void shouldHandleTheseIntervals() {
-        assertEquals(14875, sumIntervals(new int[][]{{1455, 2624}, {-3285, 1757}, {-7957, 707}}));
-                // , {2331, 6595}, {-9249, -7855}, {-6583, -4955}, {-3305, -1672}, {-8247, 2141}, {-5146, -1721}, {-7286, 6368}, {-9007, -952}, {1566, 9629}, {3450, 8071}, {1536, 6567}, {-6716, 247}, {-4576, 1741}, {-8236, 6077}, {1017, 6909}, {-1337, 1737}, {-6381, 2915}, {-5684, -4414}, {-9893, -5185}, {-4351, -4099}, {-7472, -5077}, {-6574, 6595}, {-2698, 585}, {-2856, 6786}, {4545, 9806}, {-1227, 4283}, {-7015, 6531}, {-9857, -1884}, {-5233, 1666}, {-8355, -2730}, {586, 4077}, {-8609, 6885}, {-743, -622}
+        assertEquals(20, sumIntervals(new int[][]{{10, 30}}));
+
     }
 
 }
