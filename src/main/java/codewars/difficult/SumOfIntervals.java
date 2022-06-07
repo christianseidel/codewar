@@ -1,7 +1,5 @@
 package codewars.difficult;
 
-import java.util.Arrays;
-
 public class SumOfIntervals {
 /*
     Write a function called sumIntervals that accepts an array of intervals, and returns
@@ -48,10 +46,8 @@ public class SumOfIntervals {
         int[][] ledger = establishLedger(sortedIntervals);
 
         while (countRemainingIntervals(ledger) > 0) {
-            System.out.println(Arrays.deepToString(ledger));   // OUT
 
             ledger = eliminateOneLevelOfOverlap(ledger);
-            System.out.println(Arrays.deepToString(ledger));   // OUT
 
             sum = sum + getSumOfIntervalsToEliminate(ledger);
 
@@ -141,9 +137,9 @@ public class SumOfIntervals {
 
     private int getSumOfIntervalsToEliminate(int[][] ledger) {
         int sum = 0;
-        for (int[] intervals : ledger) {
-            if (intervals[3] == 0 ){
-                sum = sum + intervals[2];
+        for (int q = 0; q < ledger.length;q++) {
+            if (ledger[q][3] == 0 ){
+                sum = sum + ledger[q][2];
             }
         }
         return sum;
@@ -154,7 +150,7 @@ public class SumOfIntervals {
         int[][] newLedger = new int[numberOfRemainingIntervals][4];
         int indexNewLedger = 0;
         // eliminate all entries with index 3 = 0;
-        for (int p = 0; p < numberOfRemainingIntervals; p++) {   // REFACTOR
+        for (int p = 0; p <= numberOfRemainingIntervals; p++) {
             if (ledger[p][3] == 1) {
                 newLedger[indexNewLedger] = ledger[p];
                 indexNewLedger++;
