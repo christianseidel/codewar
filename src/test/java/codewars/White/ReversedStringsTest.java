@@ -1,5 +1,6 @@
-package codewars.Yellow;
+package codewars.White;
 
+import codewars.White.ReversedStrings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

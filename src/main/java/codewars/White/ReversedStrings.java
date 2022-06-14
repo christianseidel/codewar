@@ -1,4 +1,4 @@
-package codewars.Yellow;
+package codewars.White;
 
 public class ReversedStrings {
 /*    Complete the solution so that it reverses the string passed into it.
