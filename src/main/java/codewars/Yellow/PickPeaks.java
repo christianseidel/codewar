@@ -35,12 +35,43 @@ public class PickPeaks {
         List<Integer> pos = new ArrayList<>();
         List<Integer> peaks = new ArrayList<>();
 
-        boolean ascending = landscape[1] > landscape[0];
+// werde ich nicht mehr brauchen
+    //  boolean ascending = landscape[1] > landscape[0];
+// 7, 6, 5, 4, 5, 8, 7, 6, 6, 6, 7, 7, 5, 4, 3, 6, 7, 8, 8, 8, 8
+        for (int i = 1; i < (landscape.length - 1); i++) {
+            if (landscape[i] > landscape[i-1]) {
+                System.out.println("position " + i + " increasing");
+                for (int j = i+1; j < landscape.length; j++) { // check for upcoming low
+                    if (landscape[j] < landscape[i]) {
+                        System.out.println("postion " + j + " decreasing");
+                        for (int g = i+1; g < j; g++) {
+                            if (landscape[g] > landscape[j]) {
+                                System.out.println("postion "  + g + " increasing again");
+                                i = g - 1;
+                                j = landscape.length;
+                                break;
+                            } else {
+                                pos.add(g);
+                                peaks.add(landscape[g]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-        for (int i = 1; i < (landscape.length -1 ); i++) {
-            while (landscape[i + 1] <= landscape[i] && i < landscape.length - 1) { // gleich oder sinkt
+            // wenn er steigt -> mit nextLow prüfen, ob es nochmal runtergeht;
+            // wenn ja, dann prüfen, ob es vorher weiter hochgeht
+            // (wenn nicht -> dann i = Peak); (wenn ja, dann neues i = (dieserPeak -1))
+
+ // ansonsten passiert hier gar nichts mehr
+/*
+
+
+            while (landscape[i + 1] < landscape[i] && i < landscape.length - 1) { // sinkt
                 if (ascending) {
                     ascending = false;
+
                     boolean peak = false;
                     for (int j = i+1; j < landscape.length; j++) { // check for upcoming low
                         if (landscape[j] < landscape[i]) {
@@ -64,7 +95,7 @@ public class PickPeaks {
             }
             ascending = true;
         }
-
+*/
         Map<String,List<Integer>> listOfPeaks = new HashMap<>();
         listOfPeaks.put("pos", pos);
         listOfPeaks.put("peaks", peaks);

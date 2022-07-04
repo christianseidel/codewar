@@ -3,7 +3,6 @@ package codewars.Yellow;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import java.util.*;
 
 class PickPeaksTest {
