@@ -1,8 +1,6 @@
 package codewars.Blue;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class MostFrequentWords {
     /*  Most frequently used words in a text
@@ -43,12 +41,14 @@ public class MostFrequentWords {
 
     public List<String> topThreeKata(String s) {
 
-        // not sure if I will need this in the end:
         if (s == null || s.isEmpty()) {
             return List.of();
         }
 
-        List<String> ignoreList = List.of(",", ";", ".", "!", "?", ":", "&", "\"", "+", ">", "<", "#", "- ", " -");
+        while (s.contains("\'\'")) {
+            s = s.replace("\'\'", "\'");
+        }
+        List<String> ignoreList = List.of(",", ";", ".", "!", "?", ":", "&", "\"", "+", ">", "<", "#", "- ", " -", "[", "]", "\r", "\n", "/", " \' ");
         s = reduceByIgnoreList(s, ignoreList).toLowerCase();
 
         TopPlaces topOne = new TopPlaces("", 0);
@@ -63,7 +63,7 @@ public class MostFrequentWords {
         while (s.length() > 0) {
 
             nextWord = findNextWord(s);
-            if (s.length() == nextWord.length()) {
+            if (s.length() == nextWord.length() || s.equals(nextWord + " " + nextWord)) {
                 counter++;
                 setRanking(ranking, nextWord, counter);
                 break;
@@ -78,33 +78,40 @@ public class MostFrequentWords {
             if (checkIfSearchWordIsLastWord(s, nextWord)) {
                 counter++;
                 s = deleteLastWord(s, nextWord);
+                if (s.length() == 0) {
+                    break;
+                }
             }
             s = cleanString(s);
-
-            System.out.println(nextWord + " × " + counter + " times");
 
             setRanking(ranking, nextWord, counter);
             
             counter = 1;
-            System.out.println("/" + s + "/");
         }
 
-        System.out.println("kurz vor Ende");
-        List<String> topThreeList = List.of(topOne.getWord(), topTwo.getWord(), topThree.getWord());
+        List<String> topThreeList = new ArrayList<>();
+        if (topOne.counter > 0) {
+            topThreeList.add(topOne.getWord());
+            if (topTwo.counter > 0) {
+                topThreeList.add(topTwo.getWord());
+                if (topThree.counter > 0) {
+                    topThreeList.add(topThree.getWord());
+                }
+            }
+        }
         return topThreeList;
-
     }
 
     public class TopPlaces {
-        int counter;
-        String word;
+        private int counter;
+        private String word;
 
-        public TopPlaces(String word, int counter) {
+         public TopPlaces(String word, int counter) {
             this.word = word;
             this.counter = counter;
         }
 
-        public int getCounter() {
+         public int getCounter() {
             return counter;
         }
 
@@ -112,16 +119,16 @@ public class MostFrequentWords {
             this.counter = counter;
         }
 
-        public String getWord() {
+         public String getWord() {
             return word;
         }
 
-        public void setWord(String word) {
+         public void setWord(String word) {
             this.word = word;
         }
     }
 
-    private static String reduceByIgnoreList(String s, List<String> ignoreList) {
+    private String reduceByIgnoreList(String s, List<String> ignoreList) {
 
         for (int i = 0; i < ignoreList.size(); i++) {
             s = s.replace(ignoreList.get(i), " ");
@@ -130,7 +137,7 @@ public class MostFrequentWords {
         return s;
     }
 
-    private static String findNextWord(String s) {
+    private String findNextWord(String s) {
 
         if (s.contains(" ")) {
             int nextCut = s.indexOf(' ');
@@ -140,7 +147,7 @@ public class MostFrequentWords {
         return s;
     }
 
-    private static String reduceBySingleElement(String s, String word) {
+    private String reduceBySingleElement(String s, String word) {
         int start = s.indexOf(" " + word + " ") + 1;
         if (start > 0) {
             s = s.substring(0, start) + s.substring(start+word.length());
@@ -148,17 +155,21 @@ public class MostFrequentWords {
         return s;
     }
 
-    private static Boolean checkIfSearchWordIsLastWord(String s, String word) {
-        String dif = s.substring((s.length()-word.length()));
-        return word.equals(dif);
+    private Boolean checkIfSearchWordIsLastWord(String s, String word) {
+        if (word.length() > s.length()) {
+            return false;
+        } else {
+            String dif = s.substring((s.length() - word.length()));
+            return word.equals(dif);
+        }
     }
 
-    private static String deleteLastWord(String s, String word) {
+    private String deleteLastWord(String s, String word) {
         s = s.substring(0, (s.length()-word.length()-1));
         return s;
     }
 
-    private static String cleanString(String s) {
+    private String cleanString(String s) {
 
         // delete two empty spaces in a row
         while (s.contains("  ")) {
@@ -171,7 +182,7 @@ public class MostFrequentWords {
         }
 
         // delete empty space at end
-        if (s.charAt(s.length()-1) == ' ') {
+        if (s.length() > 0 && s.charAt(s.length()-1) == ' ') {
             s = s.substring(0, s.length()-1);
         }
 
