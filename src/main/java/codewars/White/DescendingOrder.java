@@ -1,7 +1,9 @@
 package codewars.White;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
 
 public class DescendingOrder {
 /*
@@ -14,24 +16,26 @@ public class DescendingOrder {
         Input: 123456789 Output: 987654321
      */
 
-    public static int sortDesc(final int num) {
+    public static int sortDesc(int num) {
 
-        List<Integer> result = new ArrayList<>();
-        result.set(0, 0);
+        if (num == 0) {
+            return 0;
+        }
+
+        ArrayList<Integer> digits = new ArrayList<>();
         int i = 0;
+        while (num > 0) {
+            digits.add(i, num % 10);
+            num = num / 10;
+        }
 
-        while (num < 1) {
-            int x =  num % 10;
-            int j = i;
-            while (x >= result.get(j)) {
-                    j++;
-                }
-            // result.set
-            result.set(i, num % 10);
-            }
-        // -> need to implement a linked list here...
+        List<Integer> digitsSorted = digits.stream().sorted(Comparator.reverseOrder()).toList();
 
+        String output = "";
+        for (int n: digitsSorted) {
+            output += n;
+        };
 
-        return 987654321;
+        return Integer.parseInt(output);
     }
 }
