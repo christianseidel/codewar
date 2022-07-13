@@ -1,4 +1,4 @@
-package codewars.rankup;
+package codewars.Yellow;
 
 public class ConvertToCamelCase {
     /*  Complete the method/function so that it converts
@@ -13,16 +13,13 @@ public class ConvertToCamelCase {
 
     static String toCamelCase(String s) {
 
-        for (int i = 1; i < s.length(); i++) {
-            if (s.charAt(i) == '_' || s.charAt(i) == '-') {
-
+        char[] stringArray = s.toCharArray();
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i] == '_' || s.charAt(i) == '-') {
+                stringArray[i+1] = Character.toUpperCase(stringArray[i+1]);
             }
-            /* char a = "a";
-            a = a.toUpperCase();
-            System.out.println(aa);
-*/
         }
-
-        return "";
+        String stringIntermediate = new String(stringArray);
+        return stringIntermediate.replace("_", "").replace("-", "");
     }
 }

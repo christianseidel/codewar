@@ -1,5 +1,6 @@
-package codewars.rankup;
+package codewars.Yellow;
 
+import codewars.Yellow.ConvertToCamelCase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
